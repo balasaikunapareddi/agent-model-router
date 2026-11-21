@@ -17,7 +17,23 @@ from dataclasses import dataclass, field
 
 from .classifier import Classification
 from .matheval import solve_task
-from .models import _source_text, required_findings
+from .models import _source_text
+
+# Topic markers for analysis grading: a good analysis covers each clause
+# topic the task raised, in whatever wording. Mock answers emit canonical
+# finding phrases ("termination clause reviewed"); real models write
+# naturally ("Section 4: Termination — 30 days' notice is short"). Grade
+# the topic coverage, not the exact phrase.
+_TOPIC_MARKERS = {
+    "termination": ("termination", "terminate"),
+    "liability": ("liability", "liable"),
+    "indemnification": ("indemnif",),
+    "confidentiality": ("confidential",),
+    "payment": ("payment",),
+    "renewal": ("renewal", "renew"),
+    "governing law": ("governing law",),
+    "intellectual property": ("intellectual property", "ip ownership", " ip "),
+}
 
 THRESHOLDS = {"simple": 0.6, "moderate": 0.75, "complex": 0.8}
 
@@ -73,14 +89,15 @@ def _grade_summary(task: str, answer: str) -> tuple[float, dict]:
 
 
 def _grade_analysis(task: str, answer: str) -> tuple[float, dict]:
-    findings = required_findings(task)
-    if not findings:
+    lowered_task = task.lower()
+    topics = [kw for kw in _TOPIC_MARKERS if kw in lowered_task]
+    if not topics:
         ok = len(answer.split()) >= 8
         return (1.0 if ok else 0.0), {"substantive": ok}
     lowered = answer.lower()
-    present = [f for f in findings if f in lowered]
-    score = len(present) / len(findings)
-    return score, {"required": findings, "present": present}
+    present = [t for t in topics if any(m in lowered for m in _TOPIC_MARKERS[t])]
+    score = len(present) / len(topics)
+    return score, {"topics": topics, "present": present}
 
 
 def _grade_code(answer: str) -> tuple[float, dict]:

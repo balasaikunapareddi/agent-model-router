@@ -47,6 +47,17 @@ def test_analysis_findings_scoring():
     assert not partial.passed
 
 
+def test_analysis_natural_wording_passes():
+    # Real models don't emit the mock finding phrases; grade topic coverage.
+    task = "Review the termination and liability clauses in this contract."
+    answer = (
+        "Termination: 30 days' notice is short for a critical vendor. "
+        "Liability is capped at 3 months of fees, which is low."
+    )
+    g = _grade(task, answer)
+    assert g.passed
+
+
 def test_qa_refusal_scores_low():
     g = _grade("Explain why the sky is blue in one sentence.", "As an AI, I cannot answer that.")
     assert not g.passed
