@@ -71,7 +71,7 @@ model-router-report router_ledger.jsonl
 
 ### Optional live mode
 
-Set `GEMINI_API_KEY` and run the agent with `live=True` — the agent and the three routing tiers switch to real Gemini models (`gemini-2.0-flash-lite` / `gemini-2.0-flash` / `gemini-2.5-pro`, overridable via `ROUTER_MODEL_SMALL/MEDIUM/LARGE`). Everything else — classifier, grader, ledger — is unchanged. Live mode is verified against the Gemini free tier (`gemini-3.5-flash-lite` on all tiers): a math task routed to the small tier and passed the quality gate at 1.0, and a contract review routed to the large tier, generated a full clause-by-clause review, and passed at 1.0 — with real token counts and latencies in the ledger. (Costs stay simulated estimates from the tier price profiles.)
+Set `GEMINI_API_KEY` and run the agent with `live=True` — the agent and the three routing tiers switch to real Gemini models (all tiers default to `gemini-3.5-flash-lite`; point `ROUTER_MODEL_SMALL/MEDIUM/LARGE` at bigger models if your key has access to them). Everything else — classifier, grader, ledger — is unchanged. Live mode is verified against the Gemini free tier (`gemini-3.5-flash-lite` on all tiers): a math task routed to the small tier and passed the quality gate at 1.0, and a contract review routed to the large tier, generated a full clause-by-clause review, and passed at 1.0 — with real token counts and latencies in the ledger. (Costs stay simulated estimates from the tier price profiles.)
 
 ## What's real vs mocked
 

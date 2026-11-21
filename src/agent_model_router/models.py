@@ -244,9 +244,9 @@ def default_pool() -> ModelPool:
 # ---------------------------------------------------------------------------
 
 LIVE_MODELS = {
-    "small": os.environ.get("ROUTER_MODEL_SMALL", "gemini-2.0-flash-lite"),
-    "medium": os.environ.get("ROUTER_MODEL_MEDIUM", "gemini-2.0-flash"),
-    "large": os.environ.get("ROUTER_MODEL_LARGE", "gemini-2.5-pro"),
+    "small": os.environ.get("ROUTER_MODEL_SMALL", "gemini-3.5-flash-lite"),
+    "medium": os.environ.get("ROUTER_MODEL_MEDIUM", "gemini-3.5-flash-lite"),
+    "large": os.environ.get("ROUTER_MODEL_LARGE", "gemini-3.5-flash-lite"),
 }
 
 

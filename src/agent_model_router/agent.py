@@ -25,7 +25,7 @@ from .router import Router
 from .tools import classify_task, ledger_report, route_task, set_default_router
 
 APP_NAME = "agent_model_router"
-LIVE_AGENT_MODEL = os.environ.get("ROUTER_AGENT_MODEL", "gemini-2.0-flash")
+LIVE_AGENT_MODEL = os.environ.get("ROUTER_AGENT_MODEL", "gemini-3.5-flash-lite")
 
 
 def build_agent(live: bool = False, ledger: Ledger | None = None) -> LlmAgent:
