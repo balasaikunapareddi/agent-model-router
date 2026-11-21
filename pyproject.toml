@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-model-router"
+version = "0.1.0"
+description = "Google ADK agent that routes tasks to the cheapest model that can actually do them — deterministic difficulty classifier, quality gate with escalation, and a cost ledger vs an always-big-model baseline. Mock-first: no API key, no network."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Bala Sai Kunapareddi" }]
+dependencies = [
+    "google-adk>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+model-router-demo = "agent_model_router.demo:main"
+model-router-report = "agent_model_router.ledger:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
