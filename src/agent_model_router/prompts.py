@@ -5,6 +5,8 @@ routing policy, quality thresholds, cost math) lives in code. The prompt
 tells the agent *how to behave*, never *how to decide*.
 """
 
+__all__ = ["SYSTEM_PROMPT"]
+
 SYSTEM_PROMPT = """You are a model-routing agent. Your job is to get every user task answered by the cheapest model that can actually do it well, and to make the cost of that choice visible.
 
 Rules:

@@ -83,7 +83,7 @@ Set `GEMINI_API_KEY` and run the agent with `live=True` — the agent and the th
 
 ```
 src/agent_model_router/
-  prompts.py     system prompt (behavior only)
+  prompts.py     system prompt (behavior only) — dedicated prompts module
   classifier.py  deterministic difficulty signals
   models.py      mock model pool (+ optional live Gemini pool)
   grader.py      deterministic quality gate
@@ -91,7 +91,7 @@ src/agent_model_router/
   ledger.py      JSONL ledger + savings report (+ CLI)
   tools.py       typed ADK tools
   mock_llm.py    deterministic BaseLlm for the offline agent loop
-  agent.py       ADK LlmAgent + runner
+  agent.py       ModelRouterAgent (ADK LlmAgent + runner)
   demo.py        one-command demo batch
 tests/           classifier, models, grader, router, ledger, demo, agent loop
 ```
